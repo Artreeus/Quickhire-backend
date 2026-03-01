@@ -15,9 +15,23 @@ connectDB();
 const app = express();
 
 // Middleware
+const allowedOrigins = [
+  (process.env.FRONTEND_URL || "http://localhost:3000").trim(),
+  "http://localhost:3000",
+  "https://quickhire-frontend-puce.vercel.app",
+  "https://quickhire-frontend-hasans-projects-b7ab168c.vercel.app",
+];
+
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:3000",
+    origin: function (origin, callback) {
+      // Allow requests with no origin (mobile apps, curl, etc.)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin.trim())) {
+        return callback(null, true);
+      }
+      return callback(null, true); // Allow all for now
+    },
     credentials: true,
   })
 );

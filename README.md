@@ -1,4 +1,4 @@
-12# QuickHire - Backend API
+123# QuickHire - Backend API
 
 A RESTful API for the QuickHire mini job board application, built with Node.js, Express, and MongoDB.
 
